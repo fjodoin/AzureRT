@@ -14,6 +14,9 @@ A.R.G. - azure_resource_graph.py
 > - [x] Add all Subscriptions and map Access Control to Identities
 > - [x] Show Custom Azure RBAC Role assigned to Managed Identities
 > - [ ] Containerize frontend - node modules are taking up a lot of space
+> - [ ] Add Database services (Azure SQL/Flex, PostgreSQL, CosmosDB)
+> - [ ] Containers Apps / Instances
+> - [ ] EntraID Roles
 
 ---
 
