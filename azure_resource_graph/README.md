@@ -24,6 +24,7 @@ The `Azure Resource Graph (🏴‍☠️ ARG 🏴‍☠️)` designed to build a
 To use this script, you need the following:
 
 - **az cli**: Authenticate with `az login` before launching `azure_resource_graph.py`.
+- **az cli Resource Graph extension**: Install with `az extension add --name resource-graph` or update with  `az extension update --name resource-graph`
 - **Azure RBAC Reader**: The identity to use with the `az cli` requires atleast "Reader" on the subscriptions in-scope.
 
 ## Usage
