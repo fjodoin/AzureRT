@@ -1,5 +1,5 @@
-# cosmosdb_nosql_curling.py 🥌  
-**(Python 3+) Generate curl commands for CosmosDB operations**  
+# cosmosdb_nosql_curling.py  
+**(Python 3+) Generate 🥌 curl commands 🥌 for CosmosDB operations**  
 > [!NOTE]  
 > - Compatible with any platform that supports Python 3
 > - Only supports CosmosDB NoSQL for the moment  
