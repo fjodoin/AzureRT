@@ -1,4 +1,4 @@
-# cosmosdb_nosql_curling.py  
+# cosmosdb_curling.py  
 **(Python 3+) Generate 🥌 curl commands 🥌 for CosmosDB operations**  
 > [!NOTE]  
 > - Compatible with any platform that supports Python 3
@@ -9,7 +9,7 @@
 ---
 
 ## Overview  
-The `cosmosdb_nosql_curling.py` script is designed to generate curl commands for various Azure CosmosDB operations. It computes the necessary authorization headers from your CosmosDB connection string and supports three key operations:  
+The `cosmosdb_curling.py` script is designed to generate curl commands for various Azure CosmosDB operations. It computes the necessary authorization headers from your CosmosDB connection string and supports three key operations:  
 - **list-dbs**: List all databases in the CosmosDB account  
 - **list-colls**: List all collections (containers) in a specified database  
 - **list-docs**: List documents within a specified collection  
@@ -43,13 +43,13 @@ To use this script, ensure you have the following:
 - Operations:
     ```bash
     # List Databases    
-   python3 cosmosdb_nosql_curling.py --connection-string $connection_string --operation list-dbs
+   python3 cosmosdb_curling.py --connection-string $connection_string --operation list-dbs
     
    # List Collections in a Database
-   python3 cosmosdb_nosql_curling.py --connection-string $connection_string --operation list-colls --database your-db
+   python3 cosmosdb_curling.py --connection-string $connection_string --operation list-colls --database your-db
 
    # List Documents in a Collection
-    python3 cosmosdb_nosql_curling.py --connection-string $connection_string --operation list-docs --database your-db --collection your-coll
+    python3 cosmosdb_curling.py --connection-string $connection_string --operation list-docs --database your-db --collection your-coll
     ```
 
 3. **Execute the generated curl command**
