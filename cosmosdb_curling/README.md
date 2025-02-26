@@ -31,8 +31,8 @@ To use this script, ensure you have the following:
 1. **Clone the repository and navigate to the script directory**
 
    ```bash
-   git clone https://github.com/your_username/your_repo.git
-   cd your_repo
+   git clone https://github.com/fjodoin/AzureRT.git
+   cd cosmosdb_curling
    ```
 
 2. **Run the script with the required arguments**
@@ -40,16 +40,15 @@ To use this script, ensure you have the following:
     ```bash
     connection_string='AccountEndpoint=https://[...]'
     ```
-- List Databases:
+- Operations:
     ```bash
-    ./cosmosdb_nosql_curling.py --connection-string $connection_string --operation list-dbs
-    ```
-- List Collections in a Database:
-    ```bash
-    ./cosmosdb_nosql_curling.py --connection-string $connection_string --operation list-colls --database your-db
-    ```
-- List Documents in a Collection:
-    ```bash
+    # List Databases    
+   ./cosmosdb_nosql_curling.py --connection-string $connection_string --operation list-dbs
+    
+   # List Collections in a Database
+   ./cosmosdb_nosql_curling.py --connection-string $connection_string --operation list-colls --database your-db
+
+   # List Documents in a Collection
     ./cosmosdb_nosql_curling.py --connection-string $connection_string --operation list-docs --database your-db --collection your-coll
     ```
 
