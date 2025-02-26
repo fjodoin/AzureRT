@@ -43,13 +43,13 @@ To use this script, ensure you have the following:
 - Operations:
     ```bash
     # List Databases    
-   ./cosmosdb_nosql_curling.py --connection-string $connection_string --operation list-dbs
+   python3 cosmosdb_nosql_curling.py --connection-string $connection_string --operation list-dbs
     
    # List Collections in a Database
-   ./cosmosdb_nosql_curling.py --connection-string $connection_string --operation list-colls --database your-db
+   python3 cosmosdb_nosql_curling.py --connection-string $connection_string --operation list-colls --database your-db
 
    # List Documents in a Collection
-    ./cosmosdb_nosql_curling.py --connection-string $connection_string --operation list-docs --database your-db --collection your-coll
+    python3 cosmosdb_nosql_curling.py --connection-string $connection_string --operation list-docs --database your-db --collection your-coll
     ```
 
 3. **Execute the generated curl command**
