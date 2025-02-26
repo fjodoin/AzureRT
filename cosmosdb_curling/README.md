@@ -32,7 +32,7 @@ To use this script, ensure you have the following:
 
    ```bash
    git clone https://github.com/fjodoin/AzureRT.git
-   cd cosmosdb_curling
+   cd AzureRT/cosmosdb_curling
    ```
 
 2. **Run the script with the required arguments**
