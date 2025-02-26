@@ -16,6 +16,7 @@ Below is a table of tools and scripts included in this repository, along with th
 |Tool/Script Name|Description|Link|
 |---|---|---|
 |**azure_resource_graph_collector.py**|Build an Azure Resource Graph to visualize blindspots e.g. Key Vault Access Policies|[azure_resource_graph](./azure_resource_graph)|
+|**cosmosdb_curling.py**|CosmosDB API helper which will generate signatured curl commands|[cosmosdb_curling](./cosmosdb_curling)|
 |**Invoke-AzSAListPublicAccess.ps1**|Find Azure Storage Account Containers and Blobs with Public Access|[Invoke-AzSAListPublicAccess](./Invoke-AzSAListPublicAccess)|
 |**Invoke-AzRBACListCustomRoles.ps1**|Find Custom Azure RBAC Roles assigned across assets|[Invoke-AzRBACListCustomRoles](./Invoke-AzRBACListCustomRoles)|
 |**Invoke-AzVMBulkRunCommand.ps1**|Automates bulk execution of commands across multiple Azure Virtual Machines|[Invoke-AzVMBulkRunCommand](./Invoke-AzVMBulkRunCommand)|
