@@ -21,7 +21,7 @@ RESOURCE_COLORS = {
     "Subscription": "#FFD700",
     "SystemAssignedManagedIdentity": "#98df8a",
     "UserAssignedManagedIdentity": "#FF7F0E",
-    "Principal": "#d62728",
+    "Principal": "#8C564B",
     "FederatedCredential": "#9edae5"
 }
 
