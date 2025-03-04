@@ -13,10 +13,10 @@ RESOURCE_COLORS = {
     "Microsoft.ManagedIdentity/userAssignedIdentities": "#ff7f0e",
     "Microsoft.ContainerService/managedClusters": "#17becf",
     "Microsoft.Automation/automationAccounts": "#8c564b",
-    "Microsoft.DocumentDB/databaseAccounts": "#d62728",  # Cosmos DB
-    "Microsoft.Sql/servers": "#bcbd22",  # Azure SQL (all types)
-    "Microsoft.Logic/workflows": "#98df8a",  # Logic Apps
-    "Microsoft.DataFactory/factories": "#9edae5",  # Data Factory
+    "Microsoft.DocumentDB/databaseAccounts": "#dbdb8d",
+    "Microsoft.Sql/servers": "#f7b6d2",
+    "Microsoft.Logic/workflows": "#ff9896",
+    "Microsoft.DataFactory/factories": "#c49c94",
     "ResourceGroup": "#7f7f7f",
     "Subscription": "#bcbd22",
     "SystemAssignedManagedIdentity": "#98df8a",
@@ -64,8 +64,12 @@ class AzureGraphDataLoader:
         with ThreadPoolExecutor() as executor:
             futures = []
             for rtype in resource_types:
+                # Normalize the resource type to lowercase for comparison
+                normalized_rtype = rtype.lower()
+                # Construct the query to fetch resources of the specified type
                 query = (
-                    f"az graph query -q \"Resources | where type=~'{rtype}' | project id, name, type, resourceGroup, subscriptionId, identity\" "
+                    f"az graph query -q \"Resources | where tolower(type) =~ '{normalized_rtype}' | "
+                    "project id, name, type, resourceGroup, subscriptionId, identity\" "
                     f"--subscriptions {subscription_id} --output json"
                 )
                 futures.append(executor.submit(self.cli.run_az_cli, query))
@@ -364,10 +368,10 @@ if __name__ == "__main__":
         "Microsoft.ManagedIdentity/userAssignedIdentities",
         "Microsoft.ContainerService/managedClusters",
         "Microsoft.Automation/automationAccounts",
-        "Microsoft.DocumentDB/databaseAccounts",  # Cosmos DB
-        "Microsoft.Sql/servers",  # Azure SQL (all types)
-        "Microsoft.Logic/workflows",  # Logic Apps
-        "Microsoft.DataFactory/factories"  # Data Factory
+        "Microsoft.DocumentDB/databaseAccounts",
+        "Microsoft.Sql/servers",
+        "Microsoft.Logic/workflows",
+        "Microsoft.DataFactory/factories"
     ]
 
     cli = AzureCLI()
