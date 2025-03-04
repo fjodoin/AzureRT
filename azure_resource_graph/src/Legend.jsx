@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 
 const RESOURCE_COLORS = {
-  "Subscriptions": "#bcbd22", // Microsoft.Subscription/subscriptions
-  "ResourceGroups": "#7f7f7f", // Microsoft.Resources/resourceGroups
-  "Virtual Machines": "#1f77b4", // Microsoft.Compute/virtualMachines
-  "VM Scale Sets": "#aec7e8", // Microsoft.Compute/virtualMachineScaleSets
-  "Storage Accounts": "#2ca02c", // Microsoft.Storage/storageAccounts
-  "Key Vaults": "#9467bd", // Microsoft.KeyVault/vaults
-  "App Services": "#e377c2", // Microsoft.Web/sites
-  "User-Assigned Identities": "#ff7f0e", // Microsoft.ManagedIdentity/userAssignedIdentities
-  "AKS": "#17becf", // Microsoft.ContainerService/managedClusters
-  "Automation Accounts": "#8c564b", // Microsoft.Automation/automationAccounts
-  "Cosmos DB": "#dbdb8d", // Microsoft.DocumentDB/databaseAccounts
-  "Azure SQL": "#f7b6d2", // Microsoft.Sql/servers
-  "Logic Apps": "#ff9896", // Microsoft.Logic/workflows
-  "Data Factory": "#c49c94", // Microsoft.DataFactory/factories
+  "Subscriptions": "#FFD700", // Gold (distinct and stands out for a top-level resource)
+  "ResourceGroups": "#808080", // Gray (neutral for organizational resources)
+  "Virtual Machines": "#1f77b4", // Azure Blue (classic Azure color)
+  "VM Scale Sets": "#4E79A7", // Darker Blue (related to VMs but distinct)
+  "Storage Accounts": "#2CA02C", // Green (represents storage and data)
+  "Key Vaults": "#9467BD", // Purple (security-related, distinct)
+  "App Services": "#E377C2", // Pink (for web/app-related services)
+  "User-Assigned Identities": "#FF7F0E", // Orange (identity-related, distinct)
+  "AKS": "#17BECF", // Cyan (modern, for container services)
+  "Automation Accounts": "#8C564B", // Brown (unique for automation)
+  "Cosmos DB": "#D62728", // Red (distinct for database services)
+  "Azure SQL": "#AEC7E8", // Light Gray (neutral for SQL services)
+  "Logic Apps": "#FF9896", // Light Coral (for workflow-related services)
+  "Data Factory": "#C5B0D5", // Light Purple (for data integration services)
 };
 
 const Legend = () => {
