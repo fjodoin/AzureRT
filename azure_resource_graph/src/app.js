@@ -44,8 +44,12 @@ function App() {
             <option value="Microsoft.ContainerService/managedClusters">AKS</option>
             <option value="Microsoft.Web/sites">App Services</option>
             <option value="Microsoft.Automation/automationAccounts">AutomationAccount</option>
+            <option value="Microsoft.DocumentDB/databaseAccounts">CosmosDB</option>
+            <option value="Microsoft.DataFactory/factories">Data Factory</option>
             <option value="FederatedCredential">FederatedCredential</option>
             <option value="Microsoft.KeyVault/vaults">KeyVault</option>
+            <option value="Microsoft.Logic/workflows">Logic Apps</option>
+            <option value="Microsoft.Sql/servers">Azure SQL</option>
             <option value="Microsoft.ManagedIdentity/userAssignedIdentities">UA-ManagedIdentity</option>
             <option value="Principal">Principal</option>
             <option value="ResourceGroup">ResourceGroup</option>
