@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 
 const RESOURCE_COLORS = {
-  "AKS": "#17becf",
-  "App Services": "#e377c2",
-  "Automation Accounts": "#8c564b",
-  "Federated Credentials": "#9edae5",
-  "Key Vaults": "#9467bd",
-  "UAManagedIdentities": "#ff7f0e",
-  "Principals": "#d62728",
-  "ResourceGroups": "#7f7f7f",
-  "Storage Accounts": "#2ca02c",
-  "Subscriptions": "#bcbd22",
-  "SAManagedIdentities": "#98df8a",
-  "VMs": "#1f77b4",
-  "VM Scale Sets": "#aec7e8"  
+  "Subscriptions": "#bcbd22", // Microsoft.Subscription/subscriptions
+  "ResourceGroups": "#7f7f7f", // Microsoft.Resources/resourceGroups
+  "Virtual Machines": "#1f77b4", // Microsoft.Compute/virtualMachines
+  "VM Scale Sets": "#aec7e8", // Microsoft.Compute/virtualMachineScaleSets
+  "Storage Accounts": "#2ca02c", // Microsoft.Storage/storageAccounts
+  "Key Vaults": "#9467bd", // Microsoft.KeyVault/vaults
+  "App Services": "#e377c2", // Microsoft.Web/sites
+  "User-Assigned Identities": "#ff7f0e", // Microsoft.ManagedIdentity/userAssignedIdentities
+  "AKS": "#17becf", // Microsoft.ContainerService/managedClusters
+  "Automation Accounts": "#8c564b", // Microsoft.Automation/automationAccounts
+  "Cosmos DB": "#dbdb8d", // Microsoft.DocumentDB/databaseAccounts
+  "Azure SQL": "#f7b6d2", // Microsoft.Sql/servers
+  "Logic Apps": "#ff9896", // Microsoft.Logic/workflows
+  "Data Factory": "#c49c94", // Microsoft.DataFactory/factories
 };
 
 const Legend = () => {
@@ -31,7 +32,7 @@ const Legend = () => {
           {Object.entries(RESOURCE_COLORS).map(([resource, color]) => (
             <li key={resource} className="legend-item">
               <span className="legend-color" style={{ backgroundColor: color }}></span>
-              <span className="legend-text">{resource.split("/").pop()}</span>
+              <span className="legend-text">{resource}</span>
             </li>
           ))}
         </ul>
