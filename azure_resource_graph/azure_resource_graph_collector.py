@@ -21,9 +21,10 @@ RESOURCE_COLORS = {
     "Subscription": "#FFD700",
     "SystemAssignedManagedIdentity": "#98df8a",
     "UserAssignedManagedIdentity": "#FF7F0E",
-    "Principal": "#FF69B4",
+    "Principal": "#bcbd22",
     "FederatedCredential": "#9edae5"
 }
+
 
 ##############################################################################
 #                           HELPER: RUN AZ CLI COMMANDS
