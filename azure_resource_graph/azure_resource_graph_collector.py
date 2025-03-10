@@ -1,5 +1,6 @@
 import json
 import subprocess
+import time
 from typing import List, Dict, Set
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -31,23 +32,35 @@ RESOURCE_COLORS = {
 ##############################################################################
 class AzureCLI:
     @staticmethod
-    def run_az_cli(command: str):
+    def run_az_cli(command: str, max_retries: int = 5):
         """
-        Runs a shell command with Azure CLI and returns the parsed JSON or raw string.
-        If an error occurs or the command exits with a non-zero code, returns an empty list.
+        Runs an Azure CLI command and returns the parsed JSON or raw string.
+        Implements retry logic with exponential backoff when throttling errors are detected.
         """
-        try:
-            result = subprocess.run(command, shell=True, capture_output=True, text=True)
-            if result.returncode != 0:
-                print(f"[ERROR] Command failed ({result.returncode}): {command}\n{result.stderr}")
-                return []
+        backoff = 1  # start with a 1-second delay
+        for attempt in range(max_retries):
             try:
-                return json.loads(result.stdout)
-            except json.JSONDecodeError:
-                return result.stdout
-        except Exception as e:
-            print(f"Exception while running command: {e}")
-            return []
+                result = subprocess.run(command, shell=True, capture_output=True, text=True)
+                if result.returncode != 0:
+                    stderr_lower = result.stderr.lower()
+                    # Detect if the error message contains throttling hints
+                    if "throttled" in stderr_lower or "too many requests" in stderr_lower:
+                        print(f"[WARNING] Throttled. Attempt {attempt+1}/{max_retries}. Retrying in {backoff} seconds...")
+                        time.sleep(backoff)
+                        backoff *= 2  # exponential backoff
+                        continue
+                    else:
+                        print(f"[ERROR] Command failed ({result.returncode}): {command}\n{result.stderr}")
+                        return []
+                try:
+                    return json.loads(result.stdout)
+                except json.JSONDecodeError:
+                    return result.stdout
+            except Exception as e:
+                print(f"[EXCEPTION] Exception while running command: {e}")
+                return []
+        print(f"[ERROR] Maximum retry attempts reached for command: {command}")
+        return []
 
 ##############################################################################
 #                     DATA LOADER: FETCH RESOURCES VIA GRAPH
