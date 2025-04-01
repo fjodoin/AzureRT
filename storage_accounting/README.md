@@ -2,7 +2,7 @@
 **(Python 3+) Generate an interactive HTML file to investigate 🪣 Storage Accounts 🪣**  
 > [!NOTE]  
 > - Compatible with any platform that supports Python 3
-> - Azure CLI wrapper 🌯
+> - Azure Python3 SDK 🐍
 > - Requires "Reader" on in-scope Subscription, Resource Group, and or Storage Accounts (firewall restrictions may cause friction if launched as a non-Contribitor)
 
 ---
