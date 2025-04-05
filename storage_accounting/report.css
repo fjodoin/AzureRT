@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background: #0078d4;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+  }
+  
+  th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th {
+    cursor: pointer;
+    background: #f4f4f4;
+  }
+  
+  /* Highlight account rows on hover */
+  .account-row:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* Styles for the nested container details table */
+  .container-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .container-details-table th,
+  .container-details-table td {
+    border: 1px solid #ddd;
+    padding: 5px;
+  }
+  
+  /* Styling for the risk tag */
+  .risk-tag {
+    background-color: #ffe5e5; /* Light red background */
+    color: #b30000;            /* Dark red text */
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  
+  /* Optional additional styling */
+  .dashboard, .filters {
+    margin: 20px;
+  }
+  
