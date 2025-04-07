@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f1faff;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th {
+    cursor: pointer;
+    background-color: #0078D7;
+    color: white;
+  }
+  
+  .app-row:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* Styles for the details table inside expanded rows */
+  .details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .details-table td {
+    border: 1px solid #ddd;
+    padding: 5px;
+  }
+  
+  .detail-key {
+    font-weight: bold;
+    width: 30%;
+  }
+  
+  /* Styling for the High Risk tag */
+  .risk-tag {
+    background-color: #ffe5e5; /* Light red background */
+    color: #b30000;            /* Dark red text */
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  

@@ -46,17 +46,32 @@ body {
     padding: 5px;
   }
   
-  /* Styling for the risk tag */
+  /* Base risk tag styling */
   .risk-tag {
-    background-color: #ffe5e5; /* Light red background */
-    color: #b30000;            /* Dark red text */
     padding: 3px 6px;
     border-radius: 4px;
     font-weight: bold;
+  }
+  
+  /* High Risk - Red */
+  .risk-tag.high-risk {
+    background-color: #ffe5e5; /* Light red background */
+    color: #b30000;            /* Dark red text */
+  }
+  
+  /* Medium Risk - Orange/Amber */
+  .risk-tag.medium-risk {
+    background-color: #fff2e6; /* Light orange background */
+    color: #cc7000;            /* Dark orange text */
+  }
+  
+  /* Low Risk - Yellow */
+  .risk-tag.low-risk {
+    background-color: #ffffcc; /* Light yellow background */
+    color: #806600;            /* Dark yellow text */
   }
   
   /* Optional additional styling */
   .dashboard, .filters {
     margin: 20px;
   }
-  

@@ -86,8 +86,21 @@ class AzureStorageScanner:
                     accounts = data["value"]
                     print(f"[+] Found {len(accounts)} storage account(s) in subscription {sub_name}")
                     for account in accounts:
+                        # Ensure we keep all the original properties
                         account["subscriptionId"] = sub_id
                         account["subscriptionName"] = sub_name
+                        
+                        # Make sure the properties object is preserved
+                        if "properties" not in account:
+                            account["properties"] = {}
+                        
+                        # Explicitly extract publicNetworkAccess if present
+                        if "properties" in account and "publicNetworkAccess" in account["properties"]:
+                            # Ensure it's preserved with the correct casing
+                            publicNetworkAccess = account["properties"]["publicNetworkAccess"]
+                            account["properties"]["publicNetworkAccess"] = publicNetworkAccess
+                        
+                        # Extract resource group
                         if "id" in account:
                             parts = account["id"].split("/")
                             if "resourceGroups" in parts:
@@ -95,8 +108,11 @@ class AzureStorageScanner:
                                 if rg_index + 1 < len(parts):
                                     account["resourceGroup"] = parts[rg_index + 1]
                                     self.resource_groups.add(account["resourceGroup"])
+                        
+                        # Add location
                         if "location" in account:
                             self.locations.add(account["location"])
+                        
                         local_accounts.append(account)
                 else:
                     print(f"[!] No storage accounts found in subscription {sub_name}")

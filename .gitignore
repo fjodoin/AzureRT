@@ -1,0 +1,120 @@
+#################################################
+# Python
+#################################################
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+env.bak/
+venv.bak/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django, Flask, and other framework-specific files
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+instance/
+.webassets-cache
+.scrapy
+
+# Documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# Pyenv
+.python-version
+
+# Celery beat
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath
+*.sage.py
+
+# IDE and editor settings
+.spyderproject
+.spyproject
+.ropeproject
+
+# MkDocs
+/site
+
+# Mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+#################################################
+# PowerShell
+#################################################
+
+# PowerShell history file
+ConsoleHost_history.txt
+
+# (Add any additional PowerShell-specific temporary or generated files here)
+#################################################
+Other
+#################################################
+.html

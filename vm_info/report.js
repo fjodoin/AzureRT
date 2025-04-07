@@ -21,58 +21,30 @@ document.addEventListener("DOMContentLoaded", () => {
           return account.subscriptionName || "";
         case "location":
           return account.location || "";
-        case "publicNetworkAccess": {
-          // Check various formats of publicNetworkAccess
-          if (properties.publicNetworkAccess) {
-            return properties.publicNetworkAccess;
-          } else if (properties.networkAcls && properties.networkAcls.defaultAction) {
-            // Some Azure APIs might return it through networkAcls
-            return properties.networkAcls.defaultAction === "Allow" ? "Enabled" : "Disabled";
-          }
-          return "Unknown";
-        }
+        case "publicNetworkAccess":
+          return properties.publicNetworkAccess || "";
         case "allowBlobPublicAccess":
           if (typeof properties.allowBlobPublicAccess === "boolean") {
             return properties.allowBlobPublicAccess ? "Enabled" : "Disabled";
           }
-          return "Unknown";
+          return "";
         case "containerCount":
           return account.containers ? account.containers.length : 0;
         case "risk": {
-          // Determine if public network access is enabled - check various formats
-          let isPublicNetworkEnabled = false;
-          
-          if (properties.publicNetworkAccess) {
-            // Direct property, regardless of case
-            isPublicNetworkEnabled = properties.publicNetworkAccess.toLowerCase() === "enabled";
-          } else if (properties.networkAcls && properties.networkAcls.defaultAction) {
-            // Through networkAcls
-            isPublicNetworkEnabled = properties.networkAcls.defaultAction.toLowerCase() === "allow";
+          let riskVal = "None";
+          // Determine risk solely based on container public access levels.
+          if (
+            account.containers &&
+            account.containers.some(
+              c =>
+                c.properties &&
+                c.properties.publicAccess &&
+                c.properties.publicAccess.toLowerCase() == "container"
+            )
+          ) {
+            riskVal = "High Risk";
           }
-          
-          if (isPublicNetworkEnabled) {
-            // Start with Low Risk if public network is enabled
-            let riskLevel = "Low Risk";
-            
-            // Check for Container access (High Risk) - always takes precedence
-            if (account.containers && account.containers.some(
-                c => c.properties && 
-                    c.properties.publicAccess && 
-                    c.properties.publicAccess.toLowerCase() === "container")) {
-              riskLevel = "High Risk";
-            }
-            // Check for Blob access (Medium Risk) if not already High Risk
-            else if (account.containers && account.containers.some(
-                c => c.properties && 
-                    c.properties.publicAccess && 
-                    c.properties.publicAccess.toLowerCase() === "blob")) {
-              riskLevel = "Medium Risk";
-            }
-            
-            return riskLevel;
-          }
-          
-          return "None";
+          return riskVal;
         }
         default:
           return "";
@@ -125,79 +97,37 @@ document.addEventListener("DOMContentLoaded", () => {
       // Build rows for each storage account.
       data.forEach((account, index) => {
         const properties = account.properties || {};
-        
-        // Determine public network access status
-        let publicNetworkAccess = "Unknown";
-        if (properties.publicNetworkAccess) {
-          publicNetworkAccess = properties.publicNetworkAccess;
-        } else if (properties.networkAcls && properties.networkAcls.defaultAction) {
-          publicNetworkAccess = properties.networkAcls.defaultAction === "Allow" ? "Enabled" : "Disabled";
-        }
-        
-        // Determine blob public access
+        const publicNetworkAccess = properties.publicNetworkAccess || "Unknown";
         const allowBlobPublicAccess =
           typeof properties.allowBlobPublicAccess === "boolean"
             ? (properties.allowBlobPublicAccess ? "Enabled" : "Disabled")
             : "Unknown";
-        
         const containerCount = account.containers ? account.containers.length : 0;
-        
-        // Calculate risk based on the enhanced requirements
+        // Calculate risk solely based on container's public access.
         let risk = "None";
-        
-        // Determine if public network access is enabled
-        let isPublicNetworkEnabled = false;
-        if (properties.publicNetworkAccess) {
-          isPublicNetworkEnabled = properties.publicNetworkAccess.toLowerCase() === "enabled";
-        } else if (properties.networkAcls && properties.networkAcls.defaultAction) {
-          isPublicNetworkEnabled = properties.networkAcls.defaultAction.toLowerCase() === "allow";
+        if (
+          account.containers &&
+          account.containers.some(
+            c =>
+              c.properties &&
+              c.properties.publicAccess &&
+              c.properties.publicAccess.toLowerCase() !== "none"
+          )
+        ) {
+          risk = "High Risk";
         }
-        
-        if (isPublicNetworkEnabled) {
-          // Default to Low Risk if public network access is enabled
-          risk = "Low Risk";
-          
-          if (account.containers && account.containers.length > 0) {
-            // Check for Container level access (High Risk) - always takes precedence
-            if (account.containers.some(
-              c => c.properties && 
-                  c.properties.publicAccess && 
-                  c.properties.publicAccess.toLowerCase() === "container"
-            )) {
-              risk = "High Risk";
-            }
-            // Check for Blob level access (Medium Risk) - only if not already High Risk
-            else if (account.containers.some(
-              c => c.properties && 
-                  c.properties.publicAccess && 
-                  c.properties.publicAccess.toLowerCase() === "blob"
-            )) {
-              risk = "Medium Risk";
-            }
-          }
-        }
-        
-        // Update the display based on risk level
-        const riskDisplay = risk === "High Risk" 
-          ? '<span class="risk-tag high-risk">High Risk</span>' 
-          : (risk === "Medium Risk" 
-            ? '<span class="risk-tag medium-risk">Medium Risk</span>' 
-            : (risk === "Low Risk" 
-                ? '<span class="risk-tag low-risk">Low Risk</span>' 
-                : risk));
-                
         // Use a unique ID for toggling details.
         const uid = getUID(account, index);
         html += `<tr class="account-row" data-uid="${uid}" style="cursor:pointer;">
-                  <td>${account.name || "Unknown"}</td>
-                  <td>${account.resourceGroup || "Unknown"}</td>
-                  <td>${account.subscriptionName || "Unknown"}</td>
-                  <td>${account.location || "Unknown"}</td>
-                  <td>${publicNetworkAccess}</td>
-                  <td>${allowBlobPublicAccess}</td>
-                  <td>${containerCount}</td>
-                  <td>${riskDisplay}</td>
-                </tr>`;
+                   <td>${account.name || "Unknown"}</td>
+                   <td>${account.resourceGroup || "Unknown"}</td>
+                   <td>${account.subscriptionName || "Unknown"}</td>
+                   <td>${account.location || "Unknown"}</td>
+                   <td>${publicNetworkAccess}</td>
+                   <td>${allowBlobPublicAccess}</td>
+                   <td>${containerCount}</td>
+                   <td>${risk === "High Risk" ? '<span class="risk-tag">High Risk</span>' : risk}</td>
+                 </tr>`;
   
         // Add a hidden details row if containers exist.
         if (containerCount > 0) {
@@ -213,15 +143,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const containerAccess =
               cont.properties && cont.properties.publicAccess ? cont.properties.publicAccess : "None";
             containerDetailsHtml += `<tr>
-                                      <td>${cont.name}</td>
-                                      <td>${containerAccess}</td>
-                                    </tr>`;
+                                       <td>${cont.name}</td>
+                                       <td>${containerAccess}</td>
+                                     </tr>`;
           });
           containerDetailsHtml += `   </tbody>
                                       </table>`;
           html += `<tr class="details-row" data-uid="${uid}" style="display:none;">
-                    <td colspan="8">${containerDetailsHtml}</td>
-                  </tr>`;
+                     <td colspan="8">${containerDetailsHtml}</td>
+                   </tr>`;
         }
       });
       html += `   </tbody>
@@ -269,3 +199,4 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initial render.
     renderReport(sortedData);
   });
+  
